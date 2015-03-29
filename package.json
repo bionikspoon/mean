@@ -12,6 +12,8 @@
     "morgan": "latest",
     "compression": "latest",
     "body-parser": "latest",
-    "method-override": "latest"
+    "method-override": "latest",
+    "ejs": "latest",
+    "express-session": "latest"
   }
 }
