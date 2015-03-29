@@ -13,7 +13,9 @@
     "compression": "latest",
     "body-parser": "latest",
     "method-override": "latest",
+    "express-session": "latest",
     "ejs": "latest",
-    "express-session": "latest"
+    "mongoose": "latest",
+    "passport": "~0.2.1"
   }
 }
