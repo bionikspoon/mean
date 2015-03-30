@@ -22,6 +22,7 @@ module.exports = function (app) {
       failureRedirect: '/signin',
       failureFlash: true
     }));
+  app.get('/signout', users.signout);
 
   app.param('userId', users.userByID);
   // @formatter:on
