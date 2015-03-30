@@ -16,6 +16,8 @@
     "express-session": "latest",
     "ejs": "latest",
     "mongoose": "latest",
-    "passport": "~0.2.1"
+    "passport": "~0.2.1",
+    "passport-local": "latest",
+    "connect-flash": "latest"
   }
 }
