@@ -1,22 +1,36 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org">
 <head>
-  <meta charset="UTF-8">
   <title><%= title %></title>
 </head>
 <body>
-<img src="img/logo.jpg" alt="Logo" />
-
+<img src="/img/logo.jpg" alt="Logo" />
 <br />
-
-<% if ( userFullName ) { %>
-<h2>Hello <%=userFullName%> </h2>
+<% if (user) { %>
 <a href="/signout">Sign out</a>
 <% } else { %>
 <a href="/signup">Signup</a>
 <a href="/signin">Signin</a>
 <% } %>
 
+<section ng-view></section>
 
+<!-- @formatter:off -->
+<script>
+  window.user = <%- user || 'null' %>;
+</script>
+<!-- @formatter:on -->
+
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+
+<script src="/example/example.client.module.js"></script>
+<script src="/example/controllers/example.client.controller.js"></script>
+<script src="/example/config/example.client.routes.js"></script>
+
+<script src="/users/users.client.module.js"></script>
+<script src="/users/services/authentication.client.service.js"></script>
+
+<script src="/application.js"></script>
 </body>
 </html>

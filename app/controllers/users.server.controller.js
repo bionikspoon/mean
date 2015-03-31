@@ -18,9 +18,7 @@ var getErrorMessage = function (err) {
     }
   } else {
     for (errName in err.errors) {
-      if (err.errors[errName].message) {
-        message = err.errors[errName].message;
-      }
+      if (err.errors[errName].message) {message = err.errors[errName].message;}
     }
   }
   return message;
@@ -64,9 +62,9 @@ exports.signup = function (req, res, next) {
         return res.redirect('/signup');
       }
       req.login(user, function (err) {
-        if (err) {
-          return next(err);
-        }
+        if (err) {return next(err);}
+
+
         return res.redirect('/');
       });
     });
@@ -75,65 +73,97 @@ exports.signup = function (req, res, next) {
   }
 };
 
+exports.saveOAuthUserProfile = function (req, profile, done) {
+  User.findOne({
+    provider: profile.provider,
+    providerId: profile.providerId
+  }, function (err, user) {
+    var possibleUsername;
+    if (err) {
+      return done(err);
+    } else {
+      if (!user) {
+        possibleUsername = profile.username
+        || ((profile.email) ? profile.email.split('@')[0] : '');
+
+        User.findUniqueUsername(possibleUsername,
+          null,
+          function (availableUsername) {
+            profile.username = availableUsername;
+
+            user = new User(profile);
+
+            user.save(function (err) {
+              return done(err, user);
+            });
+          });
+      } else {
+        return done(err, user);
+      }
+    }
+  });
+};
+
 exports.signout = function (req, res) {
   req.logout();
+
   res.redirect('/');
 };
 
-exports.userByID = function (req, res, next, id) {
-  User.findOne({
-    _id: id
-  }, function (err, user) {
-    if (err) {
-      return next(err);
-    } else {
-      req.user = user;
-      next();
-    }
-  })
-};
-
-exports.create = function (req, res, next) {
-  var user = new User(req.body);
-
-  user.save(function (err) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-
-exports.list = function (req, res, next) {
-  User.find({}, 'username email', function (err, users) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(users);
-    }
-  });
-};
-
-exports.read = function (req, res) {
-  res.json(req.user);
-};
-
-exports.update = function (req, res, next) {
-  User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(user);
-    }
-  });
-};
-exports.delete = function (req, res, next) {
-  req.user.remove(function (err) {
-    if (err) {
-      return next(err)
-    } else {
-      res.json(req.user);
-    }
-  })
-};
+//exports.userByID = function (req, res, next, id) {
+//  User.findOne({
+//    _id: id
+//  }, function (err, user) {
+//    if (err) {
+//      return next(err);
+//    } else {
+//      req.user = user;
+//      next();
+//    }
+//  })
+//};
+//
+//exports.create = function (req, res, next) {
+//  var user = new User(req.body);
+//
+//  user.save(function (err) {
+//    if (err) {
+//      return next(err);
+//    } else {
+//      res.json(user);
+//    }
+//  });
+//};
+//
+//exports.list = function (req, res, next) {
+//  User.find({}, 'username email', function (err, users) {
+//    if (err) {
+//      return next(err);
+//    } else {
+//      res.json(users);
+//    }
+//  });
+//};
+//
+//exports.read = function (req, res) {
+//  res.json(req.user);
+//};
+//
+//exports.update = function (req, res, next) {
+//  User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
+//    if (err) {
+//      return next(err);
+//    } else {
+//      res.json(user);
+//    }
+//  });
+//};
+//exports.delete = function (req, res, next) {
+//  req.user.remove(function (err) {
+//    if (err) {
+//      return next(err)
+//    } else {
+//      res.json(req.user);
+//    }
+//  })
+//};

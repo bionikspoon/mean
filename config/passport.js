@@ -19,4 +19,7 @@ module.exports = function () {
   });
 
   require('./strategies/local')();
+  require('./strategies/twitter')();
+  require('./strategies/facebook')();
+  require('./strategies/google')();
 };

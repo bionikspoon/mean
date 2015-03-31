@@ -5,13 +5,6 @@ var passport = require('passport');
 
 module.exports = function (app) {
   // @formatter:off
-  app.route('/users')
-    .post(users.create)
-    .get(users.list);
-  app.route('/users/:userId')
-    .get(users.read)
-    .put(users.update)
-    .delete(users.delete);
   app.route('/signup')
     .get(users.renderSignup)
     .post(users.signup);
@@ -22,8 +15,39 @@ module.exports = function (app) {
       failureRedirect: '/signin',
       failureFlash: true
     }));
-  app.get('/signout', users.signout);
 
-  app.param('userId', users.userByID);
   // @formatter:on
+
+  app.get('/oauth/facebook', passport.authenticate('facebook', {
+    failureRedirect: '/signin'
+  }));
+  app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/signin',
+    successRedirect: '/'
+  }));
+
+  // Set up the Twitter OAuth routes
+  app.get('/oauth/twitter', passport.authenticate('twitter', {
+    failureRedirect: '/signin'
+  }));
+  app.get('/oauth/twitter/callback', passport.authenticate('twitter', {
+    failureRedirect: '/signin',
+    successRedirect: '/'
+  }));
+
+  // Set up the Google OAuth routes
+  app.get('/oauth/google', passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ],
+    failureRedirect: '/signin'
+  }));
+  app.get('/oauth/google/callback', passport.authenticate('google', {
+    failureRedirect: '/signin',
+    successRedirect: '/'
+  }));
+
+  // Set up the 'signout' route
+  app.get('/signout', users.signout);
 };

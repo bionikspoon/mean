@@ -7,8 +7,8 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
-var passport = require('passport');
 var flash = require('connect-flash');
+var passport = require('passport');
 
 
 module.exports = function () {
@@ -21,20 +21,16 @@ module.exports = function () {
   }
   //noinspection JSUnresolvedFunction
   app.use(bodyParser.urlencoded({
-        extended: true
-      }
-    )
-  );
+    extended: true
+  }));
   app.use(bodyParser.json());
   app.use(methodOverride());
 
   app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret
-      }
-    )
-  );
+    saveUninitialized: true,
+    resave: true,
+    secret: config.sessionSecret
+  }));
   app.set('views', './app/views');
   app.set('view engine', 'ejs');
 

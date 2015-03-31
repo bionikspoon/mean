@@ -15,9 +15,12 @@
     "method-override": "latest",
     "express-session": "latest",
     "ejs": "latest",
+    "connect-flash": "latest",
     "mongoose": "latest",
     "passport": "~0.2.1",
     "passport-local": "latest",
-    "connect-flash": "latest"
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-google-oauth": "latest"
   }
 }

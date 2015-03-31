@@ -73,14 +73,10 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
     if (!err) {
       if (!user) {
         callback(possibleUsername);
-      }
-      return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+      } else { _this.findUniqueUsername(username, (suffix || 0) + 1, callback);}
     }
     callback(null);
   });
-};
-UserSchema.statics.findOneByUsername = function (username, callback) {
-  this.findOne({username: new RegExp(username, 'i')}, callback);
 };
 
 
