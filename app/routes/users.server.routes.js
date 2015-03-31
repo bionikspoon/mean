@@ -1,6 +1,6 @@
 'use strict';
 
-var users = require('../../app/controllers/users.server.controller');
+var users    = require('../../app/controllers/users.server.controller');
 var passport = require('passport');
 
 module.exports = function (app) {
@@ -37,7 +37,7 @@ module.exports = function (app) {
 
   // Set up the Google OAuth routes
   app.get('/oauth/google', passport.authenticate('google', {
-    scope: [
+    scope:           [
       'https://www.googleapis.com/auth/userinfo.profile',
       'https://www.googleapis.com/auth/userinfo.email'
     ],

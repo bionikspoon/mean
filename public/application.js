@@ -3,7 +3,7 @@
 var mainApplicationModuleName = 'mean';
 
 var mainApplicationModule = angular.module(mainApplicationModuleName, [
-  'ngRoute', 'users', 'example'
+  'ngResource', 'ngRoute', 'users', 'example', 'articles'
 ]);
 
 mainApplicationModule.config([
@@ -16,6 +16,7 @@ if (window.location.hash === '#_=_') {
   window.location.hash = '#!';
 }
 
+//noinspection JSUnresolvedFunction
 angular.element(document).ready(function () {
   angular.bootstrap(document, [mainApplicationModuleName]);
 });

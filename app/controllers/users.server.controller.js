@@ -1,6 +1,6 @@
 'use strict';
 
-var User = require('mongoose').model('User');
+var User     = require('mongoose').model('User');
 var passport = require('passport');
 
 var getErrorMessage = function (err) {
@@ -18,7 +18,11 @@ var getErrorMessage = function (err) {
     }
   } else {
     for (errName in err.errors) {
-      if (err.errors[errName].message) {message = err.errors[errName].message;}
+      //noinspection JSUnfilteredForInLoop
+      if (err.errors[errName].message) {
+        //noinspection JSUnfilteredForInLoop
+        message = err.errors[errName].message;
+      }
     }
   }
   return message;
@@ -27,7 +31,7 @@ var getErrorMessage = function (err) {
 exports.renderSignin = function (req, res, next) {
   if (!req.user) {
     res.render('signin', {
-      title: 'Sign-in Form',
+      title:    'Sign-in Form',
       messages: req.flash('error') || req.flash('info')
     });
   } else {
@@ -38,7 +42,7 @@ exports.renderSignin = function (req, res, next) {
 exports.renderSignup = function (req, res, next) {
   if (!req.user) {
     res.render('signup', {
-      title: 'Sign-up Form',
+      title:    'Sign-up Form',
       messages: req.flash('error')
     });
   } else {
@@ -51,8 +55,8 @@ exports.signup = function (req, res, next) {
   var user;
 
   if (!req.user) {
-    user = new User(req.body);
-    message = null;
+    user          = new User(req.body);
+    message       = null;
     user.provider = 'local';
     user.save(function (err) {
       var message;
@@ -75,7 +79,7 @@ exports.signup = function (req, res, next) {
 
 exports.saveOAuthUserProfile = function (req, profile, done) {
   User.findOne({
-    provider: profile.provider,
+    provider:   profile.provider,
     providerId: profile.providerId
   }, function (err, user) {
     var possibleUsername;
@@ -83,8 +87,8 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
       return done(err);
     } else {
       if (!user) {
-        possibleUsername = profile.username
-        || ((profile.email) ? profile.email.split('@')[0] : '');
+        possibleUsername = profile.username || ((profile.email)
+          ? profile.email.split('@')[0] : '');
 
         User.findUniqueUsername(possibleUsername,
           null,
@@ -110,60 +114,11 @@ exports.signout = function (req, res) {
   res.redirect('/');
 };
 
-//exports.userByID = function (req, res, next, id) {
-//  User.findOne({
-//    _id: id
-//  }, function (err, user) {
-//    if (err) {
-//      return next(err);
-//    } else {
-//      req.user = user;
-//      next();
-//    }
-//  })
-//};
-//
-//exports.create = function (req, res, next) {
-//  var user = new User(req.body);
-//
-//  user.save(function (err) {
-//    if (err) {
-//      return next(err);
-//    } else {
-//      res.json(user);
-//    }
-//  });
-//};
-//
-//exports.list = function (req, res, next) {
-//  User.find({}, 'username email', function (err, users) {
-//    if (err) {
-//      return next(err);
-//    } else {
-//      res.json(users);
-//    }
-//  });
-//};
-//
-//exports.read = function (req, res) {
-//  res.json(req.user);
-//};
-//
-//exports.update = function (req, res, next) {
-//  User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
-//    if (err) {
-//      return next(err);
-//    } else {
-//      res.json(user);
-//    }
-//  });
-//};
-//exports.delete = function (req, res, next) {
-//  req.user.remove(function (err) {
-//    if (err) {
-//      return next(err)
-//    } else {
-//      res.json(req.user);
-//    }
-//  })
-//};
+exports.requiresLogin = function (req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+  next();
+};
