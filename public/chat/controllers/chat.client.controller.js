@@ -10,7 +10,7 @@ angular.module('chat').controller('ChatController', [
 
     $scope.sendMessage = function () {
       var message = {
-        text: this.messageText
+        text: this.messageText,
       };
       Socket.emit('chatMessage', message);
 
