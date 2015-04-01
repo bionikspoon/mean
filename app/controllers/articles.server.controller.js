@@ -80,7 +80,7 @@ exports.delete = function (req, res) {
   });
 };
 
-exports.articleByID = function (req, res, next, id) {
+exports.articleById = function (req, res, next, id) {
   //noinspection JSUnresolvedFunction
   Article.findById(id).populate('creator',
     'firstName lastName fullName').exec(function (err, article) {

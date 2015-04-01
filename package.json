@@ -21,6 +21,9 @@
     "passport-local": "latest",
     "passport-facebook": "latest",
     "passport-twitter": "latest",
-    "passport-google-oauth": "latest"
+    "passport-google-oauth": "latest",
+    "socket.io": "latest",
+    "connect-mongo": "latest",
+    "cookie-parser": "latest"
   }
 }

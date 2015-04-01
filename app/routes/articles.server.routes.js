@@ -14,6 +14,6 @@ module.exports = function (app) {
     articles.hasAuthorization,
     articles.delete);
 
-  app.param('articleId', articles.articleByID);
+  app.param('articleId', articles.articleById);
 };
 
