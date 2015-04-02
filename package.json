@@ -1,29 +1,36 @@
 {
-  "name": "bionikspoon-mean",
-  "version": "0.0.1",
-  "license": "MIT",
-  "description": "MEAN: MongoDB, Express.js, Angular.js, Node.js",
-  "repository": {
+  "name":            "bionikspoon-mean",
+  "version":         "0.0.1",
+  "license":         "MIT",
+  "description":     "MEAN: MongoDB, Express.js, Angular.js, Node.js",
+  "repository":      {
     "type": "git",
-    "url": "https://github.com/bionikspoon/mean.git"
+    "url":  "https://github.com/bionikspoon/mean.git"
   },
-  "dependencies": {
-    "express": "latest",
-    "morgan": "latest",
-    "compression": "latest",
-    "body-parser": "latest",
-    "method-override": "latest",
-    "express-session": "latest",
-    "ejs": "latest",
-    "connect-flash": "latest",
-    "mongoose": "latest",
-    "passport": "~0.2.1",
-    "passport-local": "latest",
-    "passport-facebook": "latest",
-    "passport-twitter": "latest",
+  "dependencies":    {
+    "express":               "latest",
+    "morgan":                "latest",
+    "compression":           "latest",
+    "body-parser":           "latest",
+    "method-override":       "latest",
+    "express-session":       "latest",
+    "ejs":                   "latest",
+    "connect-flash":         "latest",
+    "mongoose":              "latest",
+    "passport":              "~0.2.1",
+    "passport-local":        "latest",
+    "passport-facebook":     "latest",
+    "passport-twitter":      "latest",
     "passport-google-oauth": "latest",
-    "socket.io": "latest",
-    "connect-mongo": "latest",
-    "cookie-parser": "latest"
+    "socket.io":             "latest",
+    "connect-mongo":         "latest",
+    "cookie-parser":         "latest"
+  },
+  "devDependencies": {
+    "should":                   "latest",
+    "supertest":                "latest",
+    "karma":                    "latest",
+    "karma-jasmine":            "~0.3.5",
+    "karma-phantomjs-launcher": "latest"
   }
 }

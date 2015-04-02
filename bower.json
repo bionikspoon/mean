@@ -1,15 +1,18 @@
 {
-  "name": "bionikspoon-mean",
-  "version": "0.0.1",
-  "license": "MIT",
-  "description": "MEAN: MongoDB, Express.js, Angular.js, Node.js",
-  "repository": {
+  "name":            "bionikspoon-mean",
+  "version":         "0.0.1",
+  "license":         "MIT",
+  "description":     "MEAN: MongoDB, Express.js, Angular.js, Node.js",
+  "repository":      {
     "type": "git",
-    "url": "https://github.com/bionikspoon/mean.git"
+    "url":  "https://github.com/bionikspoon/mean.git"
   },
-  "dependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
+  "dependencies":    {
+    "angular":          "latest",
+    "angular-route":    "latest",
     "angular-resource": "latest"
+  },
+  "devDependencies": {
+    "angular-mocks": "latest"
   }
 }
