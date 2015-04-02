@@ -31,6 +31,17 @@
     "supertest":                "latest",
     "karma":                    "latest",
     "karma-jasmine":            "~0.3.5",
-    "karma-phantomjs-launcher": "latest"
+    "karma-phantomjs-launcher": "latest",
+    "grunt":                    "latest",
+    "grunt-env":                "latest",
+    "grunt-nodemon":            "latest",
+    "grunt-mocha-test":         "latest",
+    "grunt-karma":              "latest",
+    "grunt-protractor-runner":  "latest",
+    "grunt-contrib-jshint":     "latest",
+    "grunt-contrib-csslint":    "latest",
+    "grunt-contrib-watch":      "latest",
+    "grunt-concurrent":         "latest",
+    "grunt-node-inspector": "latest"
   }
 }
